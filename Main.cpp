@@ -3,12 +3,11 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <filesystem>
 #include "Config.h"
 
 offsets Offsets;
 c_config g_configs;
-
-
 
 std::string AthenaClass = "\\SDK\\SoT_Athena_classes.hpp";
 std::string EngineClass = "\\SDK\\SoT_Engine_classes.hpp";
@@ -44,16 +43,14 @@ int GetOffset(std::string File, std::string Class, std::string Offset)
 		if (once)
 			if (line.find(Offset) != std::string::npos)
 				return GetOffsetFromLine(line);
-
-
 	}
 }
 
 int main()
 {
-	std::string m_directory = std::experimental::filesystem::current_path().string();
+	std::string m_directory = std::filesystem::current_path().string();
 
-	if (!std::experimental::filesystem::exists(m_directory + "\\SDK"))
+	if (!std::filesystem::exists(m_directory + "\\SDK"))
 	{
 		MessageBoxA(NULL, "File Not Found", "File Not Found", 0);
 		return 0;
